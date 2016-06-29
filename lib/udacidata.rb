@@ -41,5 +41,14 @@ class Udacidata
     n == 1 ? data.last(1)[0] : data.last(n)
   end
 
+  def self.find(index)
+    data = self.all[index-1]
+    unless data
+      raise ProductNotFoundError
+    else
+      return data
+    end
+  end
+
 
 end
