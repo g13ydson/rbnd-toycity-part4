@@ -31,5 +31,15 @@ class Udacidata
     all_products
   end
 
+  def self.first(n = 1)
+    data = self.all
+    n == 1 ? data.first(1)[0] : data.first(n)
+  end
+
+  def self.last(n = 1)
+    data = self.all
+    n == 1 ? data.last(1)[0] : data.last(n)
+  end
+
 
 end
