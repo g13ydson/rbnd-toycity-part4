@@ -50,5 +50,22 @@ class Udacidata
     end
   end
 
+  def self.destroy(product_id)
+    db = CSV.table(@@data_path)
+    deleted_product = find(product_id)
+
+    if deleted_product.nil?
+      raise ProductNotFoundError
+    end
+    
+    db.delete_if { |prod| prod[:id] == product_id }
+    
+    File.open(@@data_path, "w") do |f|
+      f.write(db.to_csv)
+     end
+    deleted_product
+  end
+
+
 
 end
