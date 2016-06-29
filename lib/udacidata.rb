@@ -71,6 +71,13 @@ class Udacidata
     self.all.select { |product| options[:brand] == product.brand || options[:name] == product.name }
   end
 
+  def update(options={})
+    product = Product.find(@id)
+    brand = options[:brand] ? options[:brand] : product.brand
+    name = options[:name] ? options[:name] : product.name
+    price = options[:price] ? options[:price] : product.price
+    Product.create(id: @id, brand: brand, name: name, price: price)
+  end
 
 
 end
