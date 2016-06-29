@@ -4,6 +4,7 @@ require 'csv'
 
 class Udacidata
   @@data_path = File.dirname(__FILE__) + "/../data/data.csv"
+  create_finder_methods :name, :brand
 
   def self.create(options = {})
     db = CSV.read(@@data_path)
@@ -57,7 +58,7 @@ class Udacidata
     if deleted_product.nil?
       raise ProductNotFoundError
     end
-    
+
     db.delete_if { |prod| prod[:id] == product_id }
     
     File.open(@@data_path, "w") do |f|
