@@ -43,21 +43,18 @@ class Udacidata
   end
 
   def self.find(index)
-    data = self.all[index-1]
-    unless data
+    data = self.all
+    data.select! { |item| item.id == index }
+    if data.empty?
       raise ProductNotFoundError
     else
-      return data
+      return data[0]
     end
   end
 
   def self.destroy(product_id)
     db = CSV.table(@@data_path)
     deleted_product = find(product_id)
-
-    if deleted_product.nil?
-      raise ProductNotFoundError
-    end
 
     db.delete_if { |prod| prod[:id] == product_id }
     
